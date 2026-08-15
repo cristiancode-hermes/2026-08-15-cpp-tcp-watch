@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1e1e2e;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 40px;
+  }
+  .terminal {
+    background: #181825;
+    border-radius: 12px;
+    padding: 24px 28px;
+    font-family: 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #cdd6f4;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    max-width: 980px;
+    width: 100%;
+    border: 1px solid #313244;
+  }
+  .terminal .title-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding-bottom: 16px; border-bottom: 1px solid #313244;
+    margin-bottom: 16px;
+  }
+  .terminal .title-bar .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .terminal .title-bar .dot.r { background: #f38ba8; }
+  .terminal .title-bar .dot.y { background: #f9e2af; }
+  .terminal .title-bar .dot.g { background: #a6e3a1; }
+  .terminal .title-bar .title { margin-left: 12px; font-size: 13px; color: #6c7086; }
+  .terminal .line { white-space: pre; }
+  .terminal .highlight { color: #89b4fa; }
+  .terminal .green { color: #a6e3a1; }
+  .terminal .yellow { color: #f9e2af; }
+  .terminal .red { color: #f38ba8; }
+  .terminal .dim { color: #6c7086; }
+  .terminal .cyan { color: #89dceb; }
+  .terminal .bold { color: #cdd6f4; }
+  .terminal .sep { color: #45475a; }
+  .terminal .prompt { color: #a6adc8; }
+  .terminal .header { color: #f5e0dc; }
+</style>
+</head>
+<body>
+<div class="terminal">
+  <div class="title-bar">
+    <div class="dot r"></div>
+    <div class="dot y"></div>
+    <div class="dot g"></div>
+    <span class="title">tcp-watch — Linux TCP Connection Monitor (C++23)</span>
+  </div>
+
+  <div class="line prompt">  $ ./tcp-watch --top 6</div>
+  <div class="line bold">  TCP WATCH — /proc/net/tcp + tcp6</div>
+  <div class="line sep">  ------------------------------------------------------------------------------</div>
+  <div class="line cyan">  LISTENERS (8)</div>
+  <div class="line dim">  LOCAL                          STATE        UID    PID  PROCESS       INODE</div>
+  <div class="line"><span class="cyan">  0.0.0.0:22                     LISTEN        0      812   sshd          3E8B</span></div>
+  <div class="line"><span class="cyan">  [::]:22                        LISTEN        0      812   sshd          3E8C</span></div>
+  <div class="line"><span class="cyan">  0.0.0.0:80                     LISTEN        0      1042  nginx         3F0A</span></div>
+  <div class="line"><span class="cyan">  0.0.0.0:443                    LISTEN        0      1042  nginx         3F0B</span></div>
+  <div class="line"><span class="cyan">  127.0.0.1:3000                 LISTEN        1000   5123  node          401F</span></div>
+  <div class="line"><span class="cyan">  0.0.0.0:5432                   LISTEN        111    918   postgres      3D2C</span></div>
+  <div class="line"><span class="cyan">  127.0.0.1:8080                 LISTEN        1000   3311  java          4210</span></div>
+  <div class="line"><span class="cyan">  [::]:443                       LISTEN        0      1042  nginx         3F0D</span></div>
+  <div class="line"></div>
+  <div class="line green">  ACTIVE CONNECTIONS</div><div class="line dim">  (top 6 of 19 by queue bytes)</div>
+  <div class="line dim">  LOCAL                          REMOTE                         STATE        UID    PID  PROCESS       TX/RX</div>
+  <div class="line"><span class="green">  10.0.0.5:51234                 142.250.184.46:443              ESTAB         1000   4821  chrome        64.0k:20.2k</span></div>
+  <div class="line"><span class="green">  [2001:db8::5]:51000            [2606:4700::6810]:443          ESTAB         1000   7777  curl          27.3k:59.8k</span></div>
+  <div class="line"><span class="green">  10.0.0.5:56000                 34.120.208.123:443             ESTAB         1000   6012  docker        54.7k:24.5k</span></div>
+  <div class="line"><span class="green">  10.0.0.5:49152                 172.217.16.14:5228             ESTAB         1000   4821  chrome        37.8k:36.8k</span></div>
+  <div class="line"><span class="green">  192.168.1.10:22                192.168.1.1:51222              ESTAB         1000   812   sshd          58.8k:16.9k</span></div>
+  <div class="line"><span class="dim">  10.0.0.5:59000                 93.184.216.34:443              TIME_WAIT     1000   -1    -             59.1k:45.5k</span></div>
+  <div class="line sep">  ------------------------------------------------------------------------------</div>
+  <div class="line">  SUMMARY  total 27  ipv4 23  ipv6 4   <span class="cyan">LISTEN 8</span>   <span class="green">ESTAB 13</span>   <span class="yellow">SYN_SENT 1</span>   <span class="dim">TIME_WAIT 4</span>   <span class="yellow">CLOSE_WAIT 1</span></div>
+  <div class="line"></div>
+
+  <div class="line prompt">  $ ./tcp-watch --ports</div>
+  <div class="line bold">  TCP WATCH — top 15 local ports by connections</div>
+  <div class="line dim">  PORT   CONNS  STATE BREAKDOWN</div>
+  <div class="line">  22     3      <span class="cyan">LISTEN 2</span>  <span class="green">ESTAB 1</span></div>
+  <div class="line">  443    2      <span class="cyan">LISTEN 2</span></div>
+  <div class="line">  3000   1      <span class="cyan">LISTEN 1</span></div>
+  <div class="line">  5432   1      <span class="cyan">LISTEN 1</span></div>
+  <div class="line">  8080   1      <span class="cyan">LISTEN 1</span></div>
+  <div class="line"></div>
+
+  <div class="line prompt">  $ ./tcp-watch --watch 1</div>
+  <div class="line bold">  TCP WATCH — /proc/net/tcp + tcp6 — live (elapsed 1s)</div>
+  <div class="line sep">  ------------------------------------------------------------------------------</div>
+  <div class="line">  <span class="cyan">LISTEN 8</span>   <span class="green">ESTAB 14 (+1.0/s)</span>   <span class="yellow">SYN_SENT 2 (+1.0/s)</span>   <span class="dim">TIME_WAIT 5 (+1.0/s)</span>   <span class="yellow">CLOSE_WAIT 1</span>   <span class="bold">TOTAL 30 (+3.0/s)</span></div>
+  <div class="line sep">  ------------------------------------------------------------------------------</div>
+  <div class="line cyan">  LISTENERS</div><div class="line">  0.0.0.0:22  [::]:22  0.0.0.0:80  0.0.0.0:443  [::]:443  127.0.0.1:3000  0.0.0.0:5432  127.0.0.1:8080</div>
+  <div class="line green">  BUSIEST ESTABLISHED</div>
+  <div class="line dim">  LOCAL                          REMOTE                         STATE  PID  PROCESS       TX/RX</div>
+  <div class="line"><span class="green">  10.0.0.5:57001                 35.186.224.25:443              ESTAB  6020  kubectl       57.9k:63.4k</span></div>
+  <div class="line"><span class="green">  10.0.0.5:53001                 8.8.8.8:443                    ESTAB  7777  curl          49.3k:36.1k</span></div>
+  <div class="line"><span class="green">  192.168.1.10:22                192.168.1.1:51222              ESTAB  812   sshd          16.9k:58.8k</span></div>
+  <div class="line"><span class="green">  10.0.0.5:51235                 142.250.184.46:443             ESTAB  4821  chrome        8.3k:63.3k</span></div>
+  <div class="line sep">  ------------------------------------------------------------------------------</div>
+  <div class="line dim">  Ctrl+C para salir — 31 conexiones, 27 ipv4 / 4 ipv6</div>
+  <div class="line"></div>
+
+  <div class="line prompt">  $ ./tcp-watch --selftest</div>
+  <div class="line"><span class="green">  PASS</span>  addr: ipv4 0100007F -&gt; 127.0.0.1</div>
+  <div class="line"><span class="green">  PASS</span>  addr: ipv6 ::1</div>
+  <div class="line"><span class="green">  PASS</span>  addr: ipv6 ipv4-mapped ::ffff:127.0.0.1</div>
+  <div class="line"><span class="green">  PASS</span>  parse: linea malformada se salta sin romper el resto</div>
+  <div class="line"><span class="green">  PASS</span>  agg: counts por estado</div>
+  <div class="line"><span class="green">  PASS</span>  json: claves con comillas</div>
+  <div class="line">  <span class="bold">33 passed, 0 failed</span></div>
+  <div class="line dim">  ─────────────────────────────────────────────────────────────</div>
+  <div class="line dim">  Fuentes: /proc/net/tcp + tcp6 · inode → PID · estados · tasas delta en --watch · JSON · --demo</div>
+</div>
+</body>
+</html>
